@@ -6,8 +6,4 @@ require.loader.setPaths(newPaths);
 
 var command = require("getjs/command");
 
-// XXX this will become a "system" require
-require("environment");
-var args = ARGV;
-
-command.run(args);
+command.run(system.args);

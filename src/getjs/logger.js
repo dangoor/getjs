@@ -1,11 +1,10 @@
 var BaseLogger = require("logger").Logger;
-var system = require("environment");
 
 var Logger = exports.Logger = function() {
     
 };
 
-Logger.prototype = new BaseLogger(STDOUT);
+Logger.prototype = new BaseLogger(system.stdout);
 
 Logger.prototype.info = function() {
     return this.add(Logger.INFO, arguments[0]);
