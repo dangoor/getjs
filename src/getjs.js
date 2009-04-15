@@ -4,6 +4,6 @@ var currentPaths = require.loader.getPaths();
 var newPaths = [cwd()].concat(currentPaths);
 require.loader.setPaths(newPaths);
 
-var command = require("getjs/command");
+var main = require("getjs/main");
 
-command.run(system.args);
+main.run(system.args);
