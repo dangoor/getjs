@@ -32,74 +32,22 @@
 @introduction
 <p>A unit testing framework.</p>
 
-<pre><code>load('testing');
+<pre><code>var testing = require('testing');
 
-exports.run({
+testing.run({
   
   testTruthy: function() {
-    exports.truthy(1234);
-    exports.truthy(true, 'true really should be a truthy value!');
+    testing.truthy(1234);
+    testing.truthy(true, 'true really should be a truthy value!');
   },
   
   testRaises: function() {
-    exports.raises(function() {
+    testing.raises(function() {
       throw new Error('some error');
     })
   }
 
 });</code></pre>
-
-<p>Suppose you are developing a module called <code>Foo</code>. You may use the following directory structure</p>
-
-<ul>
-  <li>
-    Foo/
-    <ul>
-      <li>
-        lib/
-        <ul>
-          <li>
-            one.js
-          </li>
-          <li>
-            two.js
-          </li>
-        </ul>
-      </li>
-    </ul>
-    <ul>
-      <li>
-        test/
-        <ul>
-          <li>
-            test.js
-          </li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-</ul>
-
-<p>For testing, to load the whole module as it would be loaded with the normal <code>load('Foo')</code> once the module is installed, the common pattern is starting the <code>Foo/test/test.js</code> file with</p>
-
-<pre><code>#!/usr/bin/env xjs
-
-load('testing');
-load(__DIR__ + '/../../Foo');
-
-exports.run({
-  //...
-});</code></pre>
-
-<p>You can make the test file executable with</p>
-
-<pre><code>$ cd path/to/Foo
-$ chmod 755 test/test.js</code></pre>
-
-<p>and run the tests with</p>
-
-<pre><code>$ cd path/to/Foo
-$ test/test.js</code></pre>
 
 */
 
