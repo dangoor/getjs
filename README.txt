@@ -48,3 +48,31 @@ Additionally, the following files can be placed at the root:
 ; uninstall.js: a script to run before the previously installed files have 
   been removed.
 
+== Installation data ==
+
+getjs creates a directory called ".getjs" at the home directory of the
+JavaScript environment.
+
+In that directory, there is a file called metadata.json. It looks basically
+like this:
+{{{
+    {
+        repositories: [
+            "url", "url"
+        ],
+        packages: {
+            packageName: {
+                from: "url"
+                version: {
+                    label: "1.0",
+                    numeric: [1,0]
+                }
+            }
+        }
+    }
+}}}
+
+packages/
+
+PackageName.json -> the metadata file for that package
+PackageName.filelist -> list of files installed with that package
