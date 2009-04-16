@@ -52,6 +52,19 @@ testing.run({
         we.addRepository(repos[0]);
         var r2 = we.getRepositories();
         testing.equal(startingLength, r2.length);
+    },
+    testClearRepositories: function() {
+        var we = new workingenv.WorkingEnv(testdata);
+        var repos = we.getRepositories();
+        testing.truthy(repos.length > 0, "Expected at least one repo");
+        we.clearRepositories();
+        repos = we.getRepositories();
+        testing.equal(0, repos.length);
+    },
+    testGetDirectory: function() {
+        var we = new workingenv.WorkingEnv(testdata);
+        var repoMetaDir = we.getDirectory("repositories");
+        testing.equal("testdata/.getjs/repositories", repoMetaDir);
     }
 });
 

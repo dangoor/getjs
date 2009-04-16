@@ -1,0 +1,30 @@
+[{
+    "name": "Skewer",
+    "author": "Kevin Dangoor",
+    "license": "MIT",
+    "description": "Better step aside in time!",
+    "dependencies": [
+        "Tusker"
+    ],
+    "platform": "all",
+    "version": {
+        "label": "0.5",
+        "numeric": [0,5],
+        "status": "stable"
+    }
+},
+{
+    "name": "Tusker",
+    "author": "Kevin Dangoor",
+    "license": "MIT",
+    "description": "Double tusks are twice as fun.",
+    "dependencies": [
+    ],
+    "platform": 'all',
+    "version": {
+        "label": "1.0 alpha 27 'Halibut'",
+        "numeric": [1,0,0,27],
+        "status": "testing"
+    }
+}
+]
