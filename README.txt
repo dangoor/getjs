@@ -11,20 +11,21 @@ there should be a {{{package.json}}} file that looks like this:
 
 {{{
     {
-        name: "Your Cool Package",
-        author: "Your Name",
-        license: "MIT",
-        description: "The awesomest package you'll ever find. Makes toast.",
-        dependencies: ["OtherPackage >0.2"],
-        js: "lib",
-        scripts: {
+        "name": "Your Cool Package",
+        "author": "Your Name",
+        "license": "MIT",
+        "description": "The awesomest package you'll ever find. Makes toast.",
+        "dependencies": ["OtherPackage >0.2"],
+        "platform": 'all',
+        "js": "lib",
+        "scripts": {
             runme: "lib/mypkg/foo.js:bar"
         }
-        jars: ["jars/simple.jar"],
-        version: {
-            label: "1.0",
-            numeric: [1,0],
-            status: "stable"
+        "jars": ["jars/simple.jar"],
+        "version": {
+            "label": "1.0",
+            "numeric": [1,0],
+            "status": "stable"
         }
     }
 }}}
@@ -57,16 +58,17 @@ In that directory, there is a file called metadata.json. It looks basically
 like this:
 {{{
     {
-        repositories: [
+        "repositories": [
             "url", "url"
         ],
-        packages: {
-            packageName: {
-                from: "url"
-                version: {
-                    label: "1.0",
-                    numeric: [1,0]
-                }
+        "packages": {
+            "packageName": {
+                "from": "url"
+                "version": {
+                    "label": "1.0",
+                    "numeric": [1,0]
+                },
+                "neededBy": ["Package1", "Package2"]
             }
         }
     }
