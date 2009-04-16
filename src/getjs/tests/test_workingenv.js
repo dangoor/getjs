@@ -1,6 +1,6 @@
 var file = require("file");
 
-// this is ugly.
+// XXX this is ugly.
 var currentPaths = require.loader.getPaths();
 var newPaths = [file.cwd()].concat(currentPaths);
 require.loader.setPaths(newPaths);

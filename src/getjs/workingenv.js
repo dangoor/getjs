@@ -24,7 +24,7 @@ var WorkingEnv = exports.WorkingEnv = function(workingPath) {
     if (this.metadataFile.exists()) {
         var rawdata = this.metadataFile.read();
         try {
-            this.metadata = eval('(' + rawdata + ')');
+            this.metadata = json.decode(rawdata.toString());
         } catch (e) {
             log.error("Argh! My metadata is corrupted! (Could not parse the JSON): " + e);
         }
@@ -64,6 +64,7 @@ WorkingEnv.prototype = {
     _saveMetadata: function() {
         // Note: there should be some kind of file locking here!
         var rawdata = json.encode(this.metadata);
+        rawdata = rawdata.toBinary();
         this.metadataFile.write(rawdata);
     }
 }

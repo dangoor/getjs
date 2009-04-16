@@ -15,12 +15,14 @@ there should be a {{{package.json}}} file that looks like this:
         "author": "Your Name",
         "license": "MIT",
         "description": "The awesomest package you'll ever find. Makes toast.",
-        "dependencies": ["OtherPackage >0.2"],
-        "platform": 'all',
-        "js": "lib",
+        "dependencies": [
+            ["OtherPackage", [2, 0], [2, 5]]
+        ],
+        "topLevelNames": ["yourdir1", "yourmodule1"],
+        "platform": "all",
         "scripts": {
-            runme: "lib/mypkg/foo.js:bar"
-        }
+            "runme": "lib/mypkg/foo.js:bar"
+        },
         "jars": ["jars/simple.jar"],
         "version": {
             "label": "1.0",
@@ -40,6 +42,12 @@ scripts that should be generated. The generated script will run the
 function referred to in the object. In the example above, the function
 {{{bar}}} exported by the {{{lib/mypkg/foo.js}}} module will be run with
 an array containing the command line arguments.
+
+The {{{dependencies}}} reflect package names and required versions. You can
+list just package names, or each element can be an array of 
+{{{Package Name, Minimum Version, Maximum Version}}}. Maximum version
+is optional. The versions should be specified as an array of numbers that
+match up with the version.numeric property for a given package.
 
 Additionally, the following files can be placed at the root:
 
