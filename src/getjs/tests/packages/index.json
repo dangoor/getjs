@@ -1,30 +1,56 @@
-[{
-    "name": "Skewer",
-    "author": "Kevin Dangoor",
-    "license": "MIT",
-    "description": "Better step aside in time!",
-    "dependencies": [
-        "Tusker"
-    ],
-    "platform": "all",
-    "version": {
-        "label": "0.5",
-        "numeric": [0,5],
-        "status": "stable"
-    }
-},
 {
-    "name": "Tusker",
-    "author": "Kevin Dangoor",
-    "license": "MIT",
-    "description": "Double tusks are twice as fun.",
-    "dependencies": [
+    "skewer" : [
+        {
+            "name": "Skewer",
+            "author": "Kevin Dangoor",
+            "license": "MIT",
+            "description": "Better step aside in time!",
+            "dependencies": [
+                "Tusker"
+            ],
+            "platform": "all",
+            "version": {
+                "label": "0.5",
+                "numeric": [0,5],
+                "status": "stable"
+            },
+            "filename": "Skewer-0.5.jspkg",
+            "location": "Skewer-0.5.jspkg"
+        },
+        {
+            "name": "Skewer",
+            "author": "Kevin Dangoor",
+            "license": "MIT",
+            "description": "Better step aside in time!",
+            "dependencies": [
+                "Tusker"
+            ],
+            "platform": "all",
+            "version": {
+                "label": "0.6",
+                "numeric": [0,6],
+                "status": "stable"
+            },
+            "filename": "Skewer-0.6.jspkg",
+            "location": "Skewer-0.6.jspkg"
+        }
     ],
-    "platform": 'all',
-    "version": {
-        "label": "1.0 alpha 27 'Halibut'",
-        "numeric": [1,0,0,27],
-        "status": "testing"
-    }
+    "tusker": [
+        {
+            "name": "Tusker",
+            "author": "Kevin Dangoor",
+            "license": "MIT",
+            "description": "Double tusks are twice as fun.",
+            "dependencies": [
+            ],
+            "platform": "all",
+            "version": {
+                "label": "1.0 alpha 27 'Halibut'",
+                "numeric": [1,0,0,27],
+                "status": "testing"
+            },
+            "filename": "Tusker-1.0.0.27.jspkg",
+            "location": "Tusker-1.0.0.27.jspkg"
+        }
+    ]
 }
-]

@@ -251,3 +251,15 @@ exports.raises = function(fn, message) {
 exports.flunk = function(message) {
   exports.throwErr(message || 'flunked');  
 };
+
+// Test that two arrays are equal
+exports.itemsAreEqual = function(a1, a2, message) {
+    if (a1.length != a2.length) {
+        exports.throwErr(message || "" + a1 + " and " + a2 + " have different lengths");
+    }
+    for (var i=0; i < a1.length; i++) {
+        if (a1[i] != a2[i]) {
+            exports.throwErr(message || "" + a1[i] + " not equal to " + a2[i]);
+        }
+    }
+}
