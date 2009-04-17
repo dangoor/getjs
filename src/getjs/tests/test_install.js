@@ -25,6 +25,8 @@ var recreateTestdata = function() {
 }
 
 testing.run({
+    setup: recreateTestdata,
+    
     testInstallPackage: function() {
         var env = new WorkingEnv(testdata);
         env.clearRepositories();
@@ -36,5 +38,13 @@ testing.run({
         testing.truthy(packfile.exists(), "build/Skewer-0.6.jspkg should exist");
         var goodfile = testdata.join("lib", "skewer.js");
         testing.truthy(goodfile.exists(), "lib/skewer.js should have been installed");
+        
+        var dontwant = testdata.join("package.json");
+        testing.falsy(dontwant.exists(), 
+            "package.json should not be installed at the root");
+        
+        var packagesDir = testdata.join(".getjs", "packages");
+        var packageMeta = packagesDir.join("Skewer.json");
+        testing.truthy(packageMeta.exists(), "Expected Skewer.json to be installed");
     }
 });

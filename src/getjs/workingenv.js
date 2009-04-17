@@ -84,7 +84,11 @@ WorkingEnv.prototype = {
     // other parts of getjs to store specific
     // metadata.
     getDirectory: function(dirname) {
-        return this.metadir.join(dirname);
+        var dirname =  this.metadir.join(dirname);
+        if (!dirname.exists()) {
+            dirname.mkdir();
+        }
+        return dirname;
     },
     
     setBuildDir: function(dirname) {

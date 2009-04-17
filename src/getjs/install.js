@@ -8,6 +8,8 @@ exports.Installer = function(env) {
 }
 
 exports.Installer.prototype = {
+    dontinstall: /^\.getjs/,
+    
     install: function(name) {
         var repoLocations = this.env.getRepositories();
         var repos = [];
@@ -31,18 +33,33 @@ exports.Installer.prototype = {
                                   + " in any repository");
         }
         
-        this._installPackage(packFile);
+        this._installPackage(pack, packFile);
     },
     
-    _installPackage: function(packFile) {
+    _installPackage: function(pack, packFile) {
+        var dontinstall = this.dontinstall;
         var zf = new ZipFile(packFile);
         var entries = zf.entries();
         var root = this.env.root;
         
-        entries.forEach(function(entry) {
-            var destination = root.join(entry.name);
+        var destination, entry;
+        
+        for (var i = 0; i < entries.length; i++) {
+            entry = entries[i];
+            
+            if (dontinstall.exec(entry.name)) {
+                return;
+            }
+            
+            if (entry.name == "package.json") {
+                var packagesDir = this.env.getDirectory("packages");
+                destination = packagesDir.join(pack.name + ".json");
+            } else {
+                destination = root.join(entry.name);
+            }
+            
             zf.saveFile(entry, destination);
-        })
+        }
         zf.close();
     }
 };
