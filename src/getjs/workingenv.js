@@ -33,6 +33,10 @@ var WorkingEnv = exports.WorkingEnv = function(workingPath) {
             repositories: ["http://jshq.org/packages/index.json"]
         };
     }
+    
+    if (!this.metadata.buildDir) {
+        this.metadata.buildDir = workingPath.join("build");
+    }
 }
 
 WorkingEnv.prototype = {
@@ -82,6 +86,16 @@ WorkingEnv.prototype = {
     getDirectory: function(dirname) {
         return this.metadir.join(dirname);
     },
+    
+    setBuildDir: function(dirname) {
+        this.metadata.buildDir = Path(dirname);
+        this._saveMetadata();
+    },
+    
+    getBuildDir: function(dirname) {
+        return Path(this.metadata.buildDir);
+    },
+    
     _saveMetadata: function() {
         // Note: there should be some kind of file locking here!
         var rawdata = json.encode(this.metadata);

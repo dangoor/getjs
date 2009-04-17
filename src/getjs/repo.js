@@ -53,5 +53,6 @@ exports.Repository.prototype = {
             var destFile = destination.join(pack['filename']);
             destFile.write(sourceFile.read());
         }
+        return destFile;
     }
 };
