@@ -36,23 +36,25 @@ exports.Repository.prototype = {
         }
         return pack;
     },
-    getPackageFile: function(pack, destination) {
-        if (!destination.exists()) {
-            destination.mkdirs();
-        }
+    getPackageSource: function(pack) {
+        var sourceFile;
         var location = pack['location'];
-        // absolute file?
+        
         if (location.substring(0,1) == "/") {
-            var sourceFile = Path(location);
-            var destFile = destination.join(pack['filename']);
-            destFile.write(sourceFile.read());
+            sourceFile = Path(location);
         } else if (location.indexOf("://") > -1) {
             // URL case, not yet dealt with
         } else {
-            var sourceFile = Path(this.loc).dirname().join(location);
-            var destFile = destination.join(pack['filename']);
-            destFile.write(sourceFile.read());
+            sourceFile = Path(this.loc).dirname().join(location);
         }
+        return sourceFile;
+    },
+    getPackageFile: function(sourceFile, pack, destination) {
+        if (!destination.exists()) {
+            destination.mkdirs();
+        }
+        var destFile = destination.join(pack['filename']);
+        destFile.write(sourceFile.read());
         return destFile;
     }
 };

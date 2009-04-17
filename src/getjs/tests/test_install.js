@@ -55,5 +55,10 @@ testing.run({
         var filelist = json.decode(rawdata.toString());
         testing.equal(4, filelist.length);
         testing.equal(".getjs/packages/Skewer.filelist", filelist[3]);
+        
+        var packages = env.getInstalledPackages();
+        testing.equal("Skewer", packages.skewer.name);
+        testing.itemsAreEqual([0,6], packages.skewer['version'].numeric);
+        
     }
 });

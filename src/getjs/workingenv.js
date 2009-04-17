@@ -100,6 +100,25 @@ WorkingEnv.prototype = {
         return Path(this.metadata.buildDir);
     },
     
+    getInstalledPackages: function() {
+        var packages = this.metadata.packages;
+        if (!packages) {
+            packages = this.metadata.packages = {};
+        }
+        return packages;
+    },
+    
+    addPackage: function(fromURL, pack) {
+        var packages = this.getInstalledPackages();
+        var packdata = {
+            from: fromURL,
+            name: pack.name,
+            version: pack.version
+        }
+        packages[pack.name.toLowerCase()] = packdata;
+        this._saveMetadata();
+    },
+    
     _saveMetadata: function() {
         // Note: there should be some kind of file locking here!
         var rawdata = json.encode(this.metadata);

@@ -34,7 +34,8 @@ testing.run({
         var destination = testdata.join("build");
         var r = new Repository(location);
         var pack = r.getPackageInfo("skewer");
-        r.getPackageFile(pack, destination);
+        var sourceFile = r.getPackageSource(pack);
+        r.getPackageFile(sourceFile, pack, destination);
         testing.truthy(destination.exists());
     }
 });

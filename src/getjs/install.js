@@ -21,11 +21,13 @@ exports.Installer.prototype = {
         
         var pack = null;
         var packFile = null;
+        var sourceFile = null;
         for (var i=0; i < repos.length; i++) {
-            var pack = repos[i].getPackageInfo(name);
+            pack = repos[i].getPackageInfo(name);
+            sourceFile = repos[i].getPackageSource(pack);
             if (pack) {
-                packFile = repos[i].getPackageFile(pack, 
-                                this.env.getBuildDir());
+                packFile = repos[i].getPackageFile(sourceFile,
+                                pack, this.env.getBuildDir());
                 break;
             }
         }
@@ -36,6 +38,8 @@ exports.Installer.prototype = {
         }
         
         this._installPackage(pack, packFile);
+        
+        this.env.addPackage(sourceFile, pack);
     },
     
     _installPackage: function(pack, packFile) {

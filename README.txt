@@ -70,7 +70,8 @@ like this:
             "url", "url"
         ],
         "packages": {
-            "packageName": {
+            "packagename": {
+                "name": "Package Name",
                 "from": "url"
                 "version": {
                     "label": "1.0",
