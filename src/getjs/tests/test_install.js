@@ -8,6 +8,7 @@ require.loader.setPaths(newPaths);
 var testing = require("getjs/testing");
 var install = require("getjs/install");
 var WorkingEnv = require("getjs/workingenv").WorkingEnv;
+var json = require("json");
 var log = require("getjs/logger").log;
 log.level = 4;
 
@@ -46,5 +47,13 @@ testing.run({
         var packagesDir = testdata.join(".getjs", "packages");
         var packageMeta = packagesDir.join("Skewer.json");
         testing.truthy(packageMeta.exists(), "Expected Skewer.json to be installed");
+        
+        var packageFilelist = packagesDir.join("Skewer.filelist");
+        testing.truthy(packageFilelist.exists(), "Expected file list to be created");
+        
+        var rawdata = packageFilelist.read();
+        var filelist = json.decode(rawdata.toString());
+        testing.equal(4, filelist.length);
+        testing.equal(".getjs/packages/Skewer.filelist", filelist[3]);
     }
 });

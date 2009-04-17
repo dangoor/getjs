@@ -1,7 +1,9 @@
 var Repository = require("./repo").Repository;
 var exc = require("./exc");
 var log = require("./logger").log;
+var json = require("json");
 var ZipFile = require("./zipfile").ZipFile;
+var file = require("file");
 
 exports.Installer = function(env) {
     this.env = env;
@@ -43,6 +45,9 @@ exports.Installer.prototype = {
         var root = this.env.root;
         
         var destination, entry;
+        var packagesDir = this.env.getDirectory("packages");
+        
+        var filelist = [];
         
         for (var i = 0; i < entries.length; i++) {
             entry = entries[i];
@@ -52,14 +57,20 @@ exports.Installer.prototype = {
             }
             
             if (entry.name == "package.json") {
-                var packagesDir = this.env.getDirectory("packages");
                 destination = packagesDir.join(pack.name + ".json");
             } else {
                 destination = root.join(entry.name);
             }
             
+            filelist.push(root.to(destination));
+            
             zf.saveFile(entry, destination);
         }
         zf.close();
+        
+        var fl = packagesDir.join(pack.name + ".filelist");
+        filelist.push(root.to(fl));
+        
+        fl.write(json.encode(filelist));
     }
 };
