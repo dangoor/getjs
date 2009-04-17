@@ -1,3 +1,5 @@
+#!/usr/bin/env narwhal
+
 var cwd = require("file").cwd;
 
 var currentPaths = require.loader.getPaths();
