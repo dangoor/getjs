@@ -1,3 +1,11 @@
+= Deprecated in favor of Tusk =
+
+At this point (June 2, 2009), Tusk is a bit farther along than getjs and so far incorporates many of the ideas I was going for. It is presently part of Narwhal:
+
+http://narwhaljs.org/
+
+
+
 = getjs =
 
 This is the getjs JavaScript package system. With getjs, you will be able to
@@ -16,7 +24,7 @@ there should be a {{{package.json}}} file that looks like this:
         "license": "MIT",
         "description": "The awesomest package you'll ever find. Makes toast.",
         "dependencies": [
-            ["OtherPackage", [2, 0], [2, 5]]
+            ["OtherPackage > 0.5, < 1.0"]
         ],
         "topLevelNames": ["yourdir1", "yourmodule1"],
         "platform": "all",
@@ -24,11 +32,8 @@ there should be a {{{package.json}}} file that looks like this:
             "runme": "lib/mypkg/foo.js:bar"
         },
         "jars": ["jars/simple.jar"],
-        "version": {
-            "label": "1.0",
-            "numeric": [1,0],
-            "status": "stable"
-        }
+        "version": "1.0",
+        "getjsVersion": "1.0"
     }
 }}}
 
@@ -56,6 +61,27 @@ Additionally, the following files can be placed at the root:
 ; install.js: a script to run after the files have been uncompressed.
 ; uninstall.js: a script to run before the previously installed files have 
   been removed.
+  
+== Version Numbers ==
+
+Version numbers must be specified in a consistent manner in order to allow
+sorting and comparison. Here are the rules:
+
+* Numeric comparison first, segment by segments
+* Segments are separated by "."
+* Additional segments do not, in themselves, change the value
+** 1.0.0 == 1.0 == 1
+** 1.0.0.0.0.1 > 1.0
+** 1.10 > 1.9
+* For testing versions, use alphanumerics after the numeric part of the version
+* The alphanumerics are sorted
+* Testing versions sort lower than versions without alphanumerics at the end
+** 1.0 > 1.0a
+** 1.0a < 1.0a1
+** 1.0a2 > 1.0a1
+** 1.0b1 > 1.0a1
+** 1.0rc1 > 1.0b1
+** 1.0b10 > 1.0b9
 
 == Installation data ==
 
@@ -73,10 +99,7 @@ like this:
             "packagename": {
                 "name": "Package Name",
                 "from": "url"
-                "version": {
-                    "label": "1.0",
-                    "numeric": [1,0]
-                },
+                "version": "1.0",
                 "neededBy": ["Package1", "Package2"]
             }
         }
@@ -87,3 +110,16 @@ packages/
 
 PackageName.json -> the metadata file for that package
 PackageName.filelist -> list of files installed with that package
+
+== Notes ==
+
+* installer should be self updating
+* packages should have a required installer version
+** if the installer is too old, it will die immediately
+* supporting this would be nice: http://tarekziade.wordpress.com/2009/03/30/pycon-hallway-session-2-thoughts-for-multiple-versions-in-python/
+** Install packages in global location
+** be able to create a virtualenv that selects versions, rather than actually contains the versions
+* version number parsing should be defined and consistent
+** http://wiki.python.org/moin/DistutilsVersionFight
+* http://redmine.flusspferd.org/issues/show/9
+* Platform-specific code in separate package files?
